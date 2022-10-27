@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="Keywords" content="account,verify," />
+    <meta name="Description" content="account verify" />
+    <meta name="Author" content="mrinal" />
+    <meta name="viewport" content="device=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="global.css" />
+    <title>Internet Speed Meter</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="loader-widget">
+        <h1>CHECK YOUR INTERNET SPEED</h1>
+        <span class="loader hide"></span>
+        <div class="loader-content">
+          <div class="content hide">24<small>Mbps</small></div>
+          <button>Start</button>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    document.querySelector("button").addEventListener("click", (e) => {
+      var imageLink =
+          "https://upload.wikimedia.org/wikipedia/commons/6/63/Tower_Bridge_from_Shad_Thames.jpg?download",
+        downloadSize = 35000000,
+        time_start,
+        time_end,
+        downloadSrc = new Image();
+      document.querySelector(".loader-content").classList.add("hide");
+      document.querySelector(".loader").classList.remove("hide");
+      time_start = new Date().getTime();
+      var cacheImg = "?nn=" + time_start;
+      downloadSrc.src = imageLink + cacheImg;
+      console.log(downloadSrc);
+      downloadSrc.onload = function () {
+        time_end = new Date().getTime();
+        var timeDuration = (time_end - time_start) / 1000,
+          loadedBytes = downloadSize * 8;
+        totalSpeed = (loadedBytes / timeDuration / 1024 / 1024).toFixed(2);
+        let i = 0,
+          speedOut;
+        const animate = () => {
+          if (i < totalSpeed) {
+            document.querySelector(".content").innerHTML =
+              i.toFixed(2) + "<small>Mbps</small>";
+            setTimeout(animate, 20);
+            i += 1.02;
+          } else {
+            document.querySelector(".content").innerHTML =
+              totalSpeed + "<small>Mbps</small>";
+          }
+        };
+        animate();
+        document.querySelector(".loader-content").classList.remove("hide");
+        document.querySelector(".loader-content").classList.add("result");
+        document.querySelector(".loader").classList.add("hide");
+        document.querySelector(".content").classList.remove("hide");
+        e.target.innerText = "CHECK AGAIN";
+      };
+    });
+  </script>
+</html>
