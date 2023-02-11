@@ -13,6 +13,9 @@ body {
   display: none !important;
 }
 
+.main-contain{
+  display: flex;
+}
 .container {
   position: relative;
   display: inline-block;
