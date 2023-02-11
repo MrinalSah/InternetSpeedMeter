@@ -15,7 +15,9 @@ body {
 
 .main-contain{
   display: flex;
+  padding-top: 238px;
 }
+
 .container {
   position: relative;
   display: inline-block;
